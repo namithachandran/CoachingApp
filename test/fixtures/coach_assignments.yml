@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coach: one
+  coaching_program: one
+
+two:
+  coach: two
+  coaching_program: two
