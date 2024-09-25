@@ -4,8 +4,7 @@ import CompanyLandingPage from '../components/CompanyLandingPage';
 
 const CompanyLanding = props => {
   // Extract the companyId from the URL
-  const companyId = window.location.pathname.split('/').pop(); // Adjust this if your URL structure is different
-
+  const companyId = window.location.pathname.split('/').pop(); 
   return (
     <CompanyLandingPage companyId={companyId} />
   );

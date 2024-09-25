@@ -7,8 +7,10 @@ class Api::V1::EmployeesController < ApplicationController
     @coaching_programs = @employee.coaching_programs.includes(:coach)
     render json: @coaching_programs, include: :coach
   end
+   
 
   def create
+    #create employee
     company = Company.find(params[:company_id])
     employee = company.employees.new(employee_params)
 
@@ -20,9 +22,10 @@ class Api::V1::EmployeesController < ApplicationController
   end
 
   def programs_with_coaches
+    #fetch coaching programs and coaches
     coaching_programs = CoachingProgram.where.not(coach_assignments: nil)
     render json: coaching_programs.as_json(include: { coaches: { only: [:id, :name] } })
-    end
+  end
 
   private
 

@@ -5,12 +5,13 @@ const CompanyLandingPage = ({ companyId }) => {
   const [company, setCompany] = useState(null);
   const [employeeName, setEmployeeName] = useState('');
   const [employeeEmail, setEmployeeEmail] = useState('');
-  const [employeePassword, setEmployeePassword] = useState(''); // State for password
-  const [employeePasswordConfirmation, setEmployeePasswordConfirmation] = useState(''); // State for password confirmation
-  const [isRegistrationVisible, setIsRegistrationVisible] = useState(false); // State to control registration form visibility
+  const [employeePassword, setEmployeePassword] = useState(''); 
+  const [employeePasswordConfirmation, setEmployeePasswordConfirmation] = useState(''); 
+  const [isRegistrationVisible, setIsRegistrationVisible] = useState(false); 
+  const [areProgramsVisible, setAreProgramsVisible] = useState(false); 
+  const [successMessage, setSuccessMessage] = useState(''); 
 
   useEffect(() => {
-    // Fetch company data including its coaching programs
     axios.get(`/api/v1/companies/${companyId}`)
       .then(response => setCompany(response.data))
       .catch(error => console.error('Error fetching company details:', error));
@@ -19,48 +20,84 @@ const CompanyLandingPage = ({ companyId }) => {
   const handleEmployeeSubmit = (e) => {
     e.preventDefault();
     
-    // Make a request to register the employee (you'll need an API for this)
     axios.post(`/api/v1/companies/${companyId}/employees`, {
       name: employeeName,
       email: employeeEmail,
       password: employeePassword,
-      password_confirmation: employeePasswordConfirmation // Include password confirmation
+      password_confirmation: employeePasswordConfirmation
     })
     .then(response => {
       console.log('Employee registered:', response.data);
+      setSuccessMessage('Successfully registered!');
       setEmployeeName('');
       setEmployeeEmail('');
-      setEmployeePassword(''); // Clear password field
-      setEmployeePasswordConfirmation(''); // Clear confirmation field
+      setEmployeePassword('');
+      setEmployeePasswordConfirmation('');
     })
     .catch(error => {
       console.error('Error registering employee:', error);
+      setSuccessMessage('Error registering employee.'); 
     });
   };
 
   if (!company) {
-    return <div>Loading...</div>;
+    return <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>;
   }
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Welcome to {company.name}</h1> {/* Welcome message */}
-      
-      <h2>Assigned Coaching Programs</h2>
-      <ul>
-        {company.coaching_programs.map(program => (
-          <li key={program.id}>{program.title}</li>
-        ))}
-      </ul>
+    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+      <h1>Welcome to {company.name}..!!!</h1> 
 
-      {/* Button to show registration form */}
-      <button onClick={() => setIsRegistrationVisible(!isRegistrationVisible)}>
-        {isRegistrationVisible ? 'Hide Registration Form' : 'Register as an Employee'}
+      {/* Button to show assigned coaching programs */}
+      <button 
+        onClick={() => setAreProgramsVisible(!areProgramsVisible)} 
+        style={{
+          margin: '20px 0',
+          padding: '10px 20px',
+          backgroundColor: areProgramsVisible ? '#f44336' : '#4CAF50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          transition: 'background-color 0.3s'
+        }}
+      >
+        {areProgramsVisible ? 'Hide Assigned Coaching Programs' : 'Show Assigned Coaching Programs'}
+      </button> <br />
+
+      {areProgramsVisible && ( 
+        <div>
+          <h2>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              {company.coaching_programs.map(program => (
+                <li key={program.id} style={{ margin: '10px 0' }}>
+                  <span style={{ fontWeight: 'bold' }}>{program.title}</span>
+                </li>
+              ))}
+            </ul>
+          </h2>
+        </div>
+      )}
+
+      <button 
+        onClick={() => setIsRegistrationVisible(!isRegistrationVisible)} 
+        style={{
+          margin: '20px 0',
+          padding: '10px 20px',
+          backgroundColor: isRegistrationVisible ? '#f44336' : '#4CAF50',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          transition: 'background-color 0.3s'
+        }}
+      >
+        {isRegistrationVisible ? 'Hide Registration Form' : 'Employee Registration'}
       </button>
 
-      {isRegistrationVisible && ( // Conditional rendering for the registration form
-        <div>
-          <h3>Employee Registration</h3>
+      {isRegistrationVisible && ( 
+        <div style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '20px', marginTop: '20px' }}>
+          <h3>Employee Registration Form</h3>
           <form onSubmit={handleEmployeeSubmit}>
             <div>
               <label>Name:</label>
@@ -69,9 +106,9 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeeName}
                 onChange={(e) => setEmployeeName(e.target.value)}
                 required
+                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
               />
             </div>
-            <br />
             <div>
               <label>Email:</label>
               <input
@@ -79,9 +116,9 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeeEmail}
                 onChange={(e) => setEmployeeEmail(e.target.value)}
                 required
+                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
               />
             </div>
-            <br />
             <div>
               <label>Password:</label>
               <input
@@ -89,9 +126,9 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeePassword}
                 onChange={(e) => setEmployeePassword(e.target.value)}
                 required
+                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
               />
             </div>
-            <br />
             <div>
               <label>Confirm Password:</label>
               <input
@@ -99,11 +136,30 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeePasswordConfirmation}
                 onChange={(e) => setEmployeePasswordConfirmation(e.target.value)}
                 required
+                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
               />
             </div>
-            <br />
-            <button type="submit">Register</button>
+            <button 
+              type="submit"
+              style={{
+                padding: '10px 20px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s'
+              }}
+            >
+              Register
+            </button>
           </form>
+        </div>
+      )}
+
+      {successMessage && ( 
+        <div style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+          {successMessage}
         </div>
       )}
     </div>

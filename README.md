@@ -5,20 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Install the required gems:
 
-* System dependencies
+    bundle install
 
-* Configuration
+* Set up the database:
 
-* Database creation
+    rails db:create
+    rails db:migrate
+    rails db:seed
 
-* Database initialization
+* Start the server:
 
-* How to run the test suite
+    rails s
 
-* Services (job queues, cache servers, search engines, etc.)
+* Access the application:
 
-* Deployment instructions
+    Go to http://localhost:3000/admin/login to log in as an admin.
+    Go to http://localhost:3000/employees/sign_in to log in as an employee.
+    Go to http://localhost:3000/coaches/sign_in to log in as a coach.
 
-* ...

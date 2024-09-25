@@ -11,12 +11,11 @@ ActiveAdmin.register CoachingProgram do
       column :start_date
       column :end_date
   
-      # Add the "Go to Company Dashboard" button in each row
       column "Actions" do |program|
         link_to 'Go to Company Dashboard', company_path(program.company), class: 'btn btn-primary'
       end
   
-      actions # Add default actions (show, edit, delete)
+      actions
     end
     form do |f|
       f.inputs do

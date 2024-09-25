@@ -4,8 +4,7 @@ import EmployeeDashboard from '../components/EmployeeDashboard';
 
 const EmployeeLanding = props => {
   // Extract the companyId from the URL
-  const employeeId = window.location.pathname.split('/')[2]; // Adjust this if your URL structure is different
-
+  const employeeId = window.location.pathname.split('/')[2]; 
   return (
     <EmployeeDashboard employeeId={employeeId} />
   );
