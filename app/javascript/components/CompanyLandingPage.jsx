@@ -39,6 +39,9 @@ const CompanyLandingPage = ({ companyId }) => {
       setSuccessMessage('Error registering employee.'); 
     });
   };
+  const handleBackToCompanies = () => {
+    window.location.href = '/admin/companies';  // Navigate to the /admin/companies route
+  };
 
   if (!company) {
     return <div style={{ textAlign: 'center', padding: '20px' }}>Loading...</div>;
@@ -67,7 +70,7 @@ const CompanyLandingPage = ({ companyId }) => {
 
       {areProgramsVisible && ( 
         <div>
-          <h2>
+          <h5>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
               {company.coaching_programs.map(program => (
                 <li key={program.id} style={{ margin: '10px 0' }}>
@@ -75,7 +78,7 @@ const CompanyLandingPage = ({ companyId }) => {
                 </li>
               ))}
             </ul>
-          </h2>
+          </h5>
         </div>
       )}
 
@@ -162,6 +165,23 @@ const CompanyLandingPage = ({ companyId }) => {
           {successMessage}
         </div>
       )}
+     <div>
+        <button 
+          onClick={handleBackToCompanies} 
+          style={{
+            margin: '20px 0',
+            padding: '10px 20px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            transition: 'background-color 0.3s'
+          }}
+        >
+          Back to Admin Dashboard
+        </button>
+      </div>
     </div>
   );
 };

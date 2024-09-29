@@ -10,11 +10,6 @@ ActiveAdmin.register CoachingProgram do
       column :description
       column :start_date
       column :end_date
-  
-      column "Actions" do |program|
-        link_to 'Go to Company Dashboard', company_path(program.company), class: 'btn btn-primary'
-      end
-  
       actions
     end
     form do |f|
