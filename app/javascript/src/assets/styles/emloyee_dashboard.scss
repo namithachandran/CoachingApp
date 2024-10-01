@@ -1,0 +1,53 @@
+
+.dashboard-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .success-message {
+    margin: 20px 0;
+    color: green;
+    font-weight: bold;
+  }
+  
+  .program-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .program-table th,
+  .program-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .program-table tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .join-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .join-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .logout-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

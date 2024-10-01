@@ -11,6 +11,12 @@ const CoachDashboardPage = ({ coachId }) => {
       .catch(error => console.error('Error fetching programs:', error));
   }, [coachId]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+
+    window.location.href = '/coaches/sign_in'; 
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }} >Coaching Programs</h1>
@@ -35,6 +41,9 @@ const CoachDashboardPage = ({ coachId }) => {
           </tbody>
         </table>
       )}
+      <button onClick={handleLogout} style={{ marginTop: '20px', padding: '10px 20px', backgroundColor: '#f44336', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        Logout
+      </button>
     </div>
   );
 };

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
                        }
   devise_for :employees, controllers: { sessions: 'employees/sessions' }
 
+
   namespace :api do
     namespace :v1 do
       resources :coaching_programs do
@@ -38,7 +39,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :employees, only: [] do
+      resources :employees, only:[:index, :create] do
         member do
           get :programs_with_coaches
         end
@@ -65,4 +66,6 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  
 end

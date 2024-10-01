@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: coaches
+#
+#  id                     :bigint           not null, primary key
+#  name                   :string
+#  email                  :string
+#  bio                    :text
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

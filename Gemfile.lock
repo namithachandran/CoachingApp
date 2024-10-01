@@ -72,6 +72,9 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    annotate (2.7.5)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 13.0)
     arbre (1.7.0)
       activesupport (>= 3.0.0)
       ruby2_keywords (>= 0.0.2)
@@ -108,6 +111,8 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-aarch64-linux-musl)
     ffi (1.17.0-arm-linux-gnu)
@@ -239,7 +244,7 @@ GEM
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
-    rake (13.2.1)
+    rake (12.3.3)
     ransack (4.2.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -343,11 +348,13 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  annotate (~> 2.7, >= 2.7.1)
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
   devise
   factory_bot_rails
+  faker
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)

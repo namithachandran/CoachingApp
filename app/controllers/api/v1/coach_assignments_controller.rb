@@ -1,5 +1,5 @@
 class Api::V1::CoachAssignmentsController < ApplicationController
-    def create
+    def create #create coach assignments
       @coaching_program = CoachingProgram.find(params[:coaching_program_id])
       @coach_assignment = @coaching_program.coach_assignments.build(coach_assignment_params)
   

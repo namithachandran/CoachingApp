@@ -6,6 +6,7 @@ ActiveAdmin.register Company do
     id_column
     column :name
     column :description
+    column :employees
 
     column "Actions" do |company|
       link_to 'Go to Company Dashboard', company_path(company.id), class: 'btn btn-primary'

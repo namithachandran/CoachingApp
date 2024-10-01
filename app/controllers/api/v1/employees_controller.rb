@@ -1,11 +1,11 @@
 class Api::V1::EmployeesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :index]
 
-  def index
     # Fetch coaching programs assigned to the current employee
+  def index
     @employee = Employee.find(params[:employee_id])
-    @coaching_programs = @employee.coaching_programs.includes(:coach)
-    render json: @coaching_programs, include: :coach
+    @coaching_programs = @employee.coaching_programs.includes(:coaches)
+    render json: @coaching_programs.as_json(include: :coaches)
   end
    
 

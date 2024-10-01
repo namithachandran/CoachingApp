@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import backgroundImage from '../src/assets/yellow.jpg';
+import '../src/assets/styles/CompanyLandingPage.scss'; 
 
 const CompanyLandingPage = ({ companyId }) => {
   const [company, setCompany] = useState(null);
@@ -39,6 +41,7 @@ const CompanyLandingPage = ({ companyId }) => {
       setSuccessMessage('Error registering employee.'); 
     });
   };
+
   const handleBackToCompanies = () => {
     window.location.href = '/admin/companies';  // Navigate to the /admin/companies route
   };
@@ -48,25 +51,19 @@ const CompanyLandingPage = ({ companyId }) => {
   }
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
-      <h1>Welcome to {company.name}..!!!</h1> 
+    <div className="container">
+      <div className="background" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <h1>Welcome to {company.name}..!!!</h1>
+        <h2>{company.description}</h2>
+      </div>
 
       {/* Button to show assigned coaching programs */}
       <button 
-        onClick={() => setAreProgramsVisible(!areProgramsVisible)} 
-        style={{
-          margin: '20px 0',
-          padding: '10px 20px',
-          backgroundColor: areProgramsVisible ? '#f44336' : '#4CAF50',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }}
+        className={`button ${areProgramsVisible ? 'hide' : 'show'}`} 
+        onClick={() => setAreProgramsVisible(!areProgramsVisible)}
       >
         {areProgramsVisible ? 'Hide Assigned Coaching Programs' : 'Show Assigned Coaching Programs'}
-      </button> <br />
+      </button>
 
       {areProgramsVisible && ( 
         <div>
@@ -81,25 +78,15 @@ const CompanyLandingPage = ({ companyId }) => {
           </h5>
         </div>
       )}
-
+      <br></br>
       <button 
-        onClick={() => setIsRegistrationVisible(!isRegistrationVisible)} 
-        style={{
-          margin: '20px 0',
-          padding: '10px 20px',
-          backgroundColor: isRegistrationVisible ? '#f44336' : '#4CAF50',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s'
-        }}
+        className={`button ${isRegistrationVisible ? 'hide' : 'show'}`} 
+        onClick={() => setIsRegistrationVisible(!isRegistrationVisible)}
       >
         {isRegistrationVisible ? 'Hide Registration Form' : 'Employee Registration'}
       </button>
-
       {isRegistrationVisible && ( 
-        <div style={{ border: '1px solid #ddd', borderRadius: '5px', padding: '20px', marginTop: '20px' }}>
+        <div className="form">
           <h3>Employee Registration Form</h3>
           <form onSubmit={handleEmployeeSubmit}>
             <div>
@@ -109,7 +96,7 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeeName}
                 onChange={(e) => setEmployeeName(e.target.value)}
                 required
-                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
+                className="input"
               />
             </div>
             <div>
@@ -119,7 +106,7 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeeEmail}
                 onChange={(e) => setEmployeeEmail(e.target.value)}
                 required
-                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
+                className="input"
               />
             </div>
             <div>
@@ -129,7 +116,7 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeePassword}
                 onChange={(e) => setEmployeePassword(e.target.value)}
                 required
-                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
+                className="input"
               />
             </div>
             <div>
@@ -139,20 +126,12 @@ const CompanyLandingPage = ({ companyId }) => {
                 value={employeePasswordConfirmation}
                 onChange={(e) => setEmployeePasswordConfirmation(e.target.value)}
                 required
-                style={{ width: '100%', padding: '10px', margin: '10px 0', borderRadius: '5px', border: '1px solid #ddd' }}
+                className="input"
               />
             </div>
             <button 
               type="submit"
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s'
-              }}
+              className="button show"
             >
               Register
             </button>
@@ -161,23 +140,15 @@ const CompanyLandingPage = ({ companyId }) => {
       )}
 
       {successMessage && ( 
-        <div style={{ marginTop: '20px', color: 'green', fontWeight: 'bold' }}>
+        <div className="success-message">
           {successMessage}
         </div>
       )}
-     <div>
+      
+      <div>
         <button 
           onClick={handleBackToCompanies} 
-          style={{
-            margin: '20px 0',
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            transition: 'background-color 0.3s'
-          }}
+          className="back-button"
         >
           Back to Admin Dashboard
         </button>

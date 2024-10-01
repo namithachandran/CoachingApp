@@ -1,5 +1,21 @@
+# == Schema Information
+#
+# Table name: coaches
+#
+#  id                     :bigint           not null, primary key
+#  name                   :string
+#  email                  :string
+#  bio                    :text
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#
+
 class Coach < ApplicationRecord
-    devise :database_authenticatable, :recoverable, :rememberable, :validatable
+    devise :database_authenticatable, :registerable,
+    :recoverable, :rememberable, :validatable
 
     has_many :coach_assignments
     has_many :coaching_programs, through: :coach_assignments

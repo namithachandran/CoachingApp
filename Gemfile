@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'annotate', '~> 2.7', '>= 2.7.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -60,6 +60,7 @@ group :test do
   gem 'webdrivers'
   gem 'rspec-rails'  
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
